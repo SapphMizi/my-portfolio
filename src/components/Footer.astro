@@ -1,0 +1,33 @@
+---
+import { siteConfig } from '../config';
+---
+
+<footer class="border-t border-zinc-800 py-8 mt-16">
+  <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-zinc-500 text-sm">© {new Date().getFullYear()} {siteConfig.name}</p>
+    <div class="flex gap-6">
+      <a
+        href={siteConfig.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-zinc-500 hover:text-white text-sm transition-colors"
+      >
+        GitHub
+      </a>
+      <a
+        href={siteConfig.twitter}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-zinc-500 hover:text-white text-sm transition-colors"
+      >
+        X (Twitter)
+      </a>
+      <a
+        href={`mailto:${siteConfig.email}`}
+        class="text-zinc-500 hover:text-white text-sm transition-colors"
+      >
+        Contact
+      </a>
+    </div>
+  </div>
+</footer>

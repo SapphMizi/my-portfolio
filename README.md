@@ -1,46 +1,68 @@
-# Astro Starter Kit: Basics
+# my-portfolio
 
-```sh
-npm create astro@latest -- --template basics
+Astro + microCMS で構築したポートフォリオサイトです。
+
+## 技術スタック
+
+| 役割 | 技術 |
+|------|------|
+| フレームワーク | [Astro](https://astro.build) v7 |
+| スタイリング | [Tailwind CSS](https://tailwindcss.com) v4 |
+| CMS | [microCMS](https://microcms.io) |
+| 言語 | TypeScript |
+
+## ページ構成
+
+| URL | 内容 |
+|-----|------|
+| `/` | ホーム（Hero / Works / Blog / About + Skills） |
+| `/works` | 制作物一覧 |
+| `/works/[id]` | 制作物詳細 |
+| `/blog` | ブログ一覧 |
+| `/blog/[id]` | ブログ記事 |
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 2. 環境変数の設定
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+cp .env.example .env
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+`.env` を開いて以下を入力：
 
-## 🧞 Commands
+```
+MICROCMS_SERVICE_DOMAIN=your-service-id
+MICROCMS_API_KEY=your-api-key
+```
 
-All commands are run from the root of the project, from a terminal:
+microCMS の管理画面（https://app.microcms.io）でサービスを作成後、API キーを取得してください。
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### 3. 開発サーバーの起動
 
-## 👀 Want to learn more?
+```bash
+npm run dev
+# → http://localhost:4321
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## コマンド一覧
+
+| コマンド | 動作 |
+|---------|------|
+| `npm run dev` | 開発サーバー起動（localhost:4321） |
+| `npm run build` | 本番ビルド（`./dist/` に出力） |
+| `npm run preview` | ビルド結果のプレビュー |
+
+## カスタマイズ
+
+`src/config.ts` を編集するだけで名前・Bio・SNS リンク・スキル一覧が変わります。
+
+## microCMS スキーマ
+
+詳細は [CLAUDE.md](./CLAUDE.md) を参照してください。

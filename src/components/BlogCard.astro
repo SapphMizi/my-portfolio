@@ -1,0 +1,42 @@
+---
+import type { Blog } from '../lib/microcms';
+
+interface Props {
+  blog: Blog;
+}
+
+const { blog } = Astro.props;
+const date = new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<article class="group flex gap-4 p-4 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-violet-500/50 transition-all duration-300">
+  {blog.thumbnail && (
+    <div class="shrink-0 w-24 h-24 rounded-lg overflow-hidden">
+      <img
+        src={`${blog.thumbnail.url}?w=200`}
+        alt={blog.title}
+        width={96}
+        height={96}
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="min-w-0 flex flex-col justify-center">
+    <div class="flex items-center gap-2 mb-1">
+      <time class="text-zinc-500 text-xs">{date}</time>
+      {blog.category && (
+        <span class="px-2 py-0.5 bg-violet-900/40 text-violet-300 text-xs rounded-full">
+          {blog.category}
+        </span>
+      )}
+    </div>
+    <h3 class="font-medium text-white group-hover:text-violet-400 transition-colors line-clamp-2">
+      <a href={`/blog/${blog.id}`}>{blog.title}</a>
+    </h3>
+  </div>
+</article>

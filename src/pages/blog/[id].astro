@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { listBlogs, parseTags, type Blog } from '../../lib/microcms';
+
+export async function getStaticPaths() {
+  const blogs = await listBlogs();
+  return blogs.map((blog) => ({
+    params: { id: blog.id },
+    props: { blog },
+  }));
+}
+
+interface Props {
+  blog: Blog;
+}
+
+const { blog } = Astro.props;
+const tags = parseTags(blog.tags);
+const date = new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={`${blog.title} | Blog`}>
+  <div class="max-w-3xl mx-auto px-4 py-16">
+
+    <a href="/blog" class="inline-flex items-center gap-1 text-zinc-500 hover:text-white text-sm transition-colors mb-8">
+      ← Blog 一覧へ
+    </a>
+
+    <header class="mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <time class="text-zinc-500 text-sm">{date}</time>
+        {blog.category && (
+          <span class="px-2 py-0.5 bg-violet-900/40 text-violet-300 text-xs rounded-full">
+            {blog.category}
+          </span>
+        )}
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-white leading-snug">{blog.title}</h1>
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {tags.map((tag) => (
+            <span class="px-2 py-0.5 bg-zinc-800 text-zinc-400 text-xs rounded-full">{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {blog.thumbnail && (
+      <div class="mb-10 rounded-xl overflow-hidden">
+        <img
+          src={`${blog.thumbnail.url}?w=960`}
+          alt={blog.title}
+          width={960}
+          height={540}
+          class="w-full h-auto"
+        />
+      </div>
+    )}
+
+    <!--
+      microCMS のリッチエディタは HTML で返ってくる。
+      set:html は Next.js の dangerouslySetInnerHTML に相当。
+      prose / prose-invert は @tailwindcss/typography が提供するリッチテキスト整形クラス。
+    -->
+    <div
+      class="prose prose-invert prose-zinc prose-a:text-violet-400 prose-a:no-underline hover:prose-a:underline max-w-none"
+      set:html={blog.content}
+    />
+
+  </div>
+</Layout>

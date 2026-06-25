@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { listWorks, parseTags, type Work } from '../../lib/microcms';
+
+// Next.js の generateStaticParams に相当
+// ビルド時に全 Work の ID を収集し、各ページを静的生成する
+export async function getStaticPaths() {
+  const works = await listWorks();
+  return works.map((work) => ({
+    params: { id: work.id },
+    props: { work },
+  }));
+}
+
+interface Props {
+  work: Work;
+}
+
+const { work } = Astro.props;
+const techs = parseTags(work.tech_stack);
+const tags = parseTags(work.tags);
+const date = new Date(work.publishedAt).toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={`${work.title} | Works`} description={work.description}>
+  <div class="max-w-3xl mx-auto px-4 py-16">
+
+    <a href="/works" class="inline-flex items-center gap-1 text-zinc-500 hover:text-white text-sm transition-colors mb-8">
+      ← Works 一覧へ
+    </a>
+
+    <h1 class="text-3xl md:text-4xl font-bold text-white mb-3">{work.title}</h1>
+    <time class="text-zinc-500 text-sm">{date}</time>
+
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-4">
+        {tags.map((tag) => (
+          <span class="px-2 py-0.5 bg-zinc-800 text-zinc-400 text-xs rounded-full">{tag}</span>
+        ))}
+      </div>
+    )}
+
+    {work.thumbnail && (
+      <div class="mt-8 rounded-xl overflow-hidden">
+        <img
+          src={`${work.thumbnail.url}?w=960`}
+          alt={work.title}
+          width={960}
+          height={540}
+          class="w-full h-auto"
+        />
+      </div>
+    )}
+
+    {work.description && (
+      <p class="mt-8 text-zinc-300 leading-relaxed text-lg">{work.description}</p>
+    )}
+
+    {techs.length > 0 && (
+      <div class="mt-8">
+        <h2 class="text-lg font-semibold text-white mb-3">使用技術</h2>
+        <div class="flex flex-wrap gap-2">
+          {techs.map((tech) => (
+            <span class="px-3 py-1 bg-zinc-800 border border-zinc-700 text-zinc-300 text-sm rounded-lg">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="mt-10 flex gap-4">
+      {work.demo_url && (
+        <a
+          href={work.demo_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-medium rounded-lg transition-colors"
+        >
+          Demo を見る ↗
+        </a>
+      )}
+      {work.github_url && (
+        <a
+          href={work.github_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-5 py-2.5 border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white font-medium rounded-lg transition-colors"
+        >
+          GitHub ↗
+        </a>
+      )}
+    </div>
+
+  </div>
+</Layout>
