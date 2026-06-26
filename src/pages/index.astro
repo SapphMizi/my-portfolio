@@ -38,7 +38,7 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
   <section class="max-w-5xl mx-auto px-4 py-16">
     <div class="flex items-end justify-between mb-8">
       <h2 class="font-display text-3xl font-bold text-ink text-balance flex items-center gap-2">
-        <span class="text-sakura">✿</span>Works
+        <span class="text-sakura">❀</span>Works
       </h2>
       <a href="/works" class="text-sm font-medium text-lavender hover:text-sakura transition-colors">
         すべて見る →
@@ -60,7 +60,7 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
   <section class="max-w-5xl mx-auto px-4 py-16">
     <div class="flex items-end justify-between mb-8">
       <h2 class="font-display text-3xl font-bold text-ink text-balance flex items-center gap-2">
-        <span class="text-sakura">✎</span>Blog
+        <span class="text-sakura">❀</span>Blog
       </h2>
       <a href="/blog" class="text-sm font-medium text-lavender hover:text-sakura transition-colors">
         すべて見る →
@@ -78,79 +78,80 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
     )}
   </section>
 
-  <!-- ===== About + Skills + Music ===== -->
+  <!-- ===== About ===== -->
   <section id="about" class="max-w-5xl mx-auto px-4 py-16">
     <h2 class="font-display text-3xl font-bold text-ink mb-10 text-balance flex items-center gap-2">
       <span class="text-sakura">❀</span>About
     </h2>
-    <!-- 5カラムグリッド: Profile(2) + Skills/Music(3) で同じネスト階層に揃える -->
-    <div class="grid md:grid-cols-5 gap-6 items-start">
+    <!-- Profile カード（単独） -->
+    <Card>
+      <p class="text-ink leading-relaxed mb-6 text-pretty">
+        {siteConfig.bio}
+      </p>
+      <div class="flex gap-4">
+        <a
+          href={siteConfig.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub プロフィール（新しいタブで開く）"
+          class="text-sm font-medium text-lavender hover:text-sakura transition-colors"
+        >
+          GitHub ↗
+        </a>
+        <a
+          href={`mailto:${siteConfig.email}`}
+          aria-label="メールで連絡する"
+          class="text-sm font-medium text-lavender hover:text-sakura transition-colors"
+        >
+          Contact ↗
+        </a>
+      </div>
+    </Card>
+  </section>
 
-      <!-- Profile -->
-      <Card class="md:col-span-2">
-        <p class="text-ink leading-relaxed mb-6 text-pretty">
-          {siteConfig.bio}
-        </p>
-        <div class="flex gap-4">
-          <a
-            href={siteConfig.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub プロフィール（新しいタブで開く）"
-            class="text-sm font-medium text-lavender hover:text-sakura transition-colors"
-          >
-            GitHub ↗
-          </a>
-          <a
-            href={`mailto:${siteConfig.email}`}
-            aria-label="メールで連絡する"
-            class="text-sm font-medium text-lavender hover:text-sakura transition-colors"
-          >
-            Contact ↗
-          </a>
-        </div>
+  <!-- ===== Skills ===== -->
+  <section class="max-w-5xl mx-auto px-4 py-16">
+    <h2 class="font-display text-3xl font-bold text-ink mb-10 text-balance flex items-center gap-2">
+      <span class="text-sakura">❀</span>Skills
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Programming: 「カテゴリ : チップ」の行レイアウト -->
+      <Card>
+        <h3 class="font-display text-lg font-bold text-ink mb-5 flex items-center gap-2">
+          <span class="text-lavender">⌨</span>Programming
+        </h3>
+        <dl class="space-y-3">
+          {Object.entries(skillCategories).map(([category, names]) => (
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-3">
+              <dt class="sm:w-24 shrink-0 text-xs text-faint uppercase tracking-widest sm:pt-0.5">
+                {category}
+              </dt>
+              <dd class="flex flex-wrap gap-1.5">
+                {names.map((name) => <Badge variant="lavender">{name}</Badge>)}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </Card>
 
-      <div class="md:col-span-3 space-y-6">
-        <!-- Programming: 「カテゴリ : チップ」の行レイアウト（ネストカードを廃止） -->
-        <Card>
-          <h3 class="font-display text-lg font-bold text-ink mb-5 flex items-center gap-2">
-            <span class="text-lavender">⌨</span>Programming
-          </h3>
-          <dl class="space-y-3">
-            {Object.entries(skillCategories).map(([category, names]) => (
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-3">
-                <dt class="sm:w-24 shrink-0 text-xs text-faint uppercase tracking-widest sm:pt-0.5">
-                  {category}
-                </dt>
-                <dd class="flex flex-wrap gap-1.5">
-                  {names.map((name) => <Badge variant="lavender">{name}</Badge>)}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Card>
-
-        <!-- Music: 区切り線で並べた行（ネストカードを廃止） -->
-        <Card>
-          <h3 class="font-display text-lg font-bold text-ink mb-2 flex items-center gap-2">
-            <span class="text-sakura">♪</span>Music
-          </h3>
-          <ul class="divide-y divide-blossom/50">
-            {musicActivities.map((activity) => (
-              <li class="flex flex-wrap items-center gap-x-3 gap-y-2 py-3 first:pt-2 last:pb-0">
-                <span class="font-medium text-ink">{activity.description}</span>
-                {activity.genres.length > 0 && (
-                  <div class="flex flex-wrap gap-1.5 sm:ml-auto">
-                    {activity.genres.map((genre) => <Badge variant="sakura">{genre}</Badge>)}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </Card>
-      </div>
-
+      <!-- Music: 区切り線で並べた行 -->
+      <Card>
+        <h3 class="font-display text-lg font-bold text-ink mb-2 flex items-center gap-2">
+          <span class="text-sakura">♪</span>Music
+        </h3>
+        <ul class="divide-y divide-blossom/50">
+          {musicActivities.map((activity) => (
+            <li class="flex flex-wrap items-center gap-x-3 gap-y-2 py-3 first:pt-2 last:pb-0">
+              <span class="font-medium text-ink">{activity.description}</span>
+              {activity.genres.length > 0 && (
+                <div class="flex flex-wrap gap-1.5 sm:ml-auto">
+                  {activity.genres.map((genre) => <Badge variant="sakura">{genre}</Badge>)}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Card>
     </div>
   </section>
 
