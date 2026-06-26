@@ -1,6 +1,27 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  /* ===== Sapph カラーパレット =====
+     バナーのラベンダー×ピンク×ゴールドをダーク背景に落とし込む */
+
+  /* 背景系（深い紫ベース） */
+  --color-night:     #120d1a;   /* メイン背景 */
+  --color-dusk:      #1e1530;   /* サーフェス（ヘッダー・フッター） */
+  --color-twilight:  #2a1f40;   /* カード */
+  --color-border:    #3d2e56;   /* ボーダー */
+
+  /* テキスト系 */
+  --color-mist:      #f5eeff;   /* 主要テキスト（ほぼ白、ラベンダー寄り） */
+  --color-haze:      #c9b3e8;   /* 補助テキスト（ミュートラベンダー） */
+  --color-dim:       #8a7aaa;   /* 薄いテキスト（日付など） */
+
+  /* アクセント */
+  --color-lavender:  #c084e8;   /* プライマリ（バナー左のラベンダー） */
+  --color-sakura:    #e879a3;   /* セカンダリ（バナー右のピンク） */
+  --color-gold:      #d4a84a;   /* ゴールド（バナーのキラキラ） */
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

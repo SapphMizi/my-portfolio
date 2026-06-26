@@ -8,16 +8,16 @@ const works = await listWorks();
 
 <Layout title="Works | Portfolio">
   <div class="max-w-5xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-bold text-white mb-2">Works</h1>
-    <p class="text-zinc-400 mb-10">制作物・ポートフォリオ</p>
+    <h1 class="text-3xl font-bold text-mist mb-2">Works</h1>
+    <p class="text-haze mb-10">制作物・ポートフォリオ</p>
 
     {works.length > 0 ? (
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         {works.map((work) => <WorkCard work={work} />)}
       </div>
     ) : (
-      <div class="text-center py-20 border border-dashed border-zinc-800 rounded-xl">
-        <p class="text-zinc-500">microCMS に Works を追加すると表示されます</p>
+      <div class="text-center py-20 border border-dashed border-border rounded-xl">
+        <p class="text-dim">microCMS に Works を追加すると表示されます</p>
       </div>
     )}
   </div>
