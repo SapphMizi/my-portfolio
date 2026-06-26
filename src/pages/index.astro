@@ -113,24 +113,8 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
     <h2 class="font-display text-3xl font-bold text-ink mb-10 text-balance flex items-center gap-2">
       <span class="text-sakura">❀</span>Skills
     </h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <!-- Programming: 「カテゴリ : チップ」の行レイアウト -->
-      <Card>
-        <h3 class="font-display text-lg font-bold text-ink mb-5 flex items-center gap-2">
-          <span class="text-lavender">⌨</span>Programming
-        </h3>
-        <dl class="space-y-3">
-          {Object.entries(skillCategories).map(([category, names]) => (
-            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-3">
-              <dt class="sm:w-24 shrink-0 text-xs text-faint uppercase tracking-widest sm:pt-0.5">
-                {category}
-              </dt>
-              <dd class="text-sm text-ink">{names.join(', ')}</dd>
-            </div>
-          ))}
-        </dl>
-      </Card>
-
+    <!-- 横幅に関わらず常に縦積み（Music → Programming の順） -->
+    <div class="flex flex-col gap-6">
       <!-- Music: 区切り線で並べた行 -->
       <Card>
         <h3 class="font-display text-lg font-bold text-ink mb-2 flex items-center gap-2">
@@ -146,6 +130,23 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
             </li>
           ))}
         </ul>
+      </Card>
+
+      <!-- Programming: 「カテゴリ : チップ」の行レイアウト -->
+      <Card>
+        <h3 class="font-display text-lg font-bold text-ink mb-5 flex items-center gap-2">
+          <span class="text-lavender">⌨</span>Programming
+        </h3>
+        <dl class="space-y-3">
+          {Object.entries(skillCategories).map(([category, names]) => (
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-3">
+              <dt class="sm:w-24 shrink-0 text-xs text-faint uppercase tracking-widest sm:pt-0.5">
+                {category}
+              </dt>
+              <dd class="text-sm text-ink">{names.join(', ')}</dd>
+            </div>
+          ))}
+        </dl>
       </Card>
     </div>
   </section>
