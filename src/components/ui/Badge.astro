@@ -1,0 +1,28 @@
+---
+/**
+ * Badge — shadcn/ui の Badge パターンを純 Astro で再現したもの。
+ * 技術スタック・タグ・ジャンルなど「小さなラベル」を一貫した見た目で表示する。
+ * 静的表示なので JS は一切含まない。
+ *
+ * パステル地 + 深いプラム文字でコントラストを確保（アクセシビリティ対応）。
+ */
+interface Props {
+  variant?: 'lavender' | 'sakura' | 'gold' | 'neutral';
+  class?: string;
+}
+
+const { variant = 'lavender', class: className = '' } = Astro.props;
+
+const variants: Record<NonNullable<Props['variant']>, string> = {
+  lavender: 'bg-wisteria/60 text-ink',
+  sakura:   'bg-blossom/70 text-ink',
+  gold:     'bg-gold/20 text-ink',
+  neutral:  'bg-petal text-muted',
+};
+---
+
+<span
+  class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium whitespace-nowrap ${variants[variant]} ${className}`}
+>
+  <slot />
+</span>

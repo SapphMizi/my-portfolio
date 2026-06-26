@@ -1,0 +1,27 @@
+---
+/**
+ * Card — shadcn/ui の Card パターンを純 Astro で再現したもの。
+ * 白地・大きめ角丸・色つきソフトシャドウの kawaii カードを一貫して使うための土台。
+ *
+ * 使い方:
+ *   <Card>...</Card>
+ *   <Card class="md:col-span-2">...</Card>
+ *   <Card hover>...</Card>   // ホバーで浮き上がる（リンクカード向け）
+ */
+interface Props {
+  class?: string;
+  hover?: boolean;
+}
+
+const { class: className = '', hover = false } = Astro.props;
+
+const base =
+  'bg-cloud border border-wisteria/70 rounded-3xl p-6 shadow-[var(--shadow-kawaii)]';
+const hoverCls = hover
+  ? 'transition-all duration-300 hover:shadow-[var(--shadow-kawaii-hover)] hover:-translate-y-1'
+  : '';
+---
+
+<div class={`${base} ${hoverCls} ${className}`}>
+  <slot />
+</div>
