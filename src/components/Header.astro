@@ -8,17 +8,18 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-border bg-night/80 backdrop-blur-sm">
+<header class="sticky top-0 z-50 border-b border-blossom/60 bg-cream/80 backdrop-blur-md">
   <nav class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-    <a href="/" class="font-display font-bold text-lg text-mist hover:text-lavender transition-colors">
+    <a href="/" class="group flex items-center gap-1.5 font-bold text-lg text-ink hover:text-lavender transition-colors">
+      <span class="text-sakura group-hover:rotate-12 transition-transform">❀</span>
       {siteConfig.name}
     </a>
-    <ul class="flex gap-6">
+    <ul class="flex gap-1 sm:gap-2">
       {navLinks.map((link) => (
         <li>
           <a
             href={link.href}
-            class="text-haze hover:text-mist text-sm transition-colors"
+            class="px-3 py-1.5 rounded-full text-muted hover:text-lavender hover:bg-petal text-sm font-medium transition-colors"
           >
             {link.label}
           </a>

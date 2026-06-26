@@ -2,16 +2,19 @@
 import { siteConfig } from '../config';
 ---
 
-<footer class="border-t border-border py-8 mt-16">
+<footer class="border-t border-blossom/60 bg-petal/40 py-10 mt-16">
   <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <p class="text-dim text-sm">© {new Date().getFullYear()} {siteConfig.name}</p>
-    <div class="flex gap-6">
+    <p class="text-muted text-sm flex items-center gap-1.5">
+      <span class="text-sakura">❀</span>
+      © {new Date().getFullYear()} {siteConfig.name}
+    </p>
+    <div class="flex gap-5">
       <a
         href={siteConfig.github}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub（新しいタブで開く）"
-        class="text-dim hover:text-mist text-sm transition-colors"
+        class="text-muted hover:text-lavender text-sm transition-colors"
       >
         GitHub
       </a>
@@ -20,14 +23,14 @@ import { siteConfig } from '../config';
         target="_blank"
         rel="noopener noreferrer"
         aria-label="X (Twitter)（新しいタブで開く）"
-        class="text-dim hover:text-mist text-sm transition-colors"
+        class="text-muted hover:text-lavender text-sm transition-colors"
       >
         X (Twitter)
       </a>
       <a
         href={`mailto:${siteConfig.email}`}
         aria-label="メールで連絡する"
-        class="text-dim hover:text-mist text-sm transition-colors"
+        class="text-muted hover:text-lavender text-sm transition-colors"
       >
         Contact
       </a>

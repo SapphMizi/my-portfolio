@@ -1,6 +1,5 @@
 /* Google Fonts — Zen Maru Gothic（筑紫A丸ゴシックの無料フォールバック）
-   Mac には筑紫A丸ゴシックが標準搭載されているのでそちらが優先され、
-   非 Mac 環境ではこの Zen Maru Gothic が読み込まれる */
+   Mac には筑紫A丸ゴシックが標準搭載されているのでそちらが優先される */
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
 
 @import "tailwindcss";
@@ -9,26 +8,39 @@
 
 @theme {
   /* ===== フォント =====
-     筑紫A丸ゴシック（= 筑紫AMゴシック / Mac 標準）を最優先。
-     無い環境は Zen Maru Gothic → システムフォントの順でフォールバック。
-     サイト全体（日本語・英語とも）にこの丸ゴシックが適用される */
+     筑紫A丸ゴシック（Mac標準）→ Zen Maru Gothic の順でフォールバック */
   --font-sans:
     "筑紫A丸ゴシック", "Tsukushi A Round Gothic", "TsukuARdGothic",
     "Zen Maru Gothic", "Hiragino Maru Gothic ProN",
     ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sans);
 
-  /* ===== Sapph カラーパレット ===== */
-  --color-night:     #120d1a;
-  --color-dusk:      #1e1530;
-  --color-twilight:  #2a1f40;
-  --color-border:    #3d2e56;
-  --color-mist:      #f5eeff;
-  --color-haze:      #c9b3e8;
-  --color-dim:       #8a7aaa;
-  --color-lavender:  #c084e8;
-  --color-sakura:    #e879a3;
-  --color-gold:      #d4a84a;
+  /* ===== Kawaii パステルパレット（ライト） =====
+     配色戦略: ラベンダー(主) / サクラピンク(副) / ゴールド(差し色)
+     バナーの水彩パステルを白背景に展開 */
+
+  /* 背景・サーフェス */
+  --color-cream:    #fff7fb;  /* メイン背景（ほんのりピンクの白） */
+  --color-petal:    #fdeef6;  /* セクションの淡いピンク地 */
+  --color-cloud:    #ffffff;  /* カード（純白） */
+
+  /* ボーダー */
+  --color-blossom:  #f7d6e8;  /* ピンク系ボーダー */
+  --color-wisteria: #e7dcf7;  /* ラベンダー系ボーダー */
+
+  /* テキスト */
+  --color-ink:      #574463;  /* 主要テキスト（深いプラム） */
+  --color-muted:    #9a89ab;  /* 補助テキスト */
+  --color-faint:    #bcaecb;  /* 薄いテキスト（日付など） */
+
+  /* アクセント */
+  --color-lavender: #a85fe0;  /* 主アクセント */
+  --color-sakura:   #ec6ca0;  /* 副アクセント */
+  --color-gold:     #e0a93c;  /* 差し色（キラキラ） */
+
+  /* 影（パステルの色つきソフトシャドウ） */
+  --shadow-kawaii: 0 8px 30px -8px rgba(168, 95, 224, 0.18);
+  --shadow-kawaii-hover: 0 14px 40px -10px rgba(236, 108, 160, 0.28);
 }
 
 @layer base {
@@ -36,14 +48,19 @@
     scroll-behavior: smooth;
   }
 
-  /* アクセシビリティ: キーボードフォーカスを明示 */
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+  }
+
+  /* キーボードフォーカスを明示（アクセシビリティ） */
   :focus-visible {
     outline: 2px solid var(--color-lavender);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
-  /* reduced-motion 対応 */
+  /* アニメーション軽減設定を尊重 */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
