@@ -19,22 +19,26 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
 <Layout title={`${siteConfig.name} | Portfolio`} description={siteConfig.bio}>
 
   <!-- ===== Hero ===== -->
-  <section class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-    <!-- バナーの水彩ブロブを暗背景に再現 -->
+  <section class="min-h-dvh flex items-center justify-center px-4 relative overflow-hidden">
+    <!-- 水彩ブロブ（パフォーマンス影響を避けるため will-change なし） -->
     <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-lavender/10 rounded-full blur-3xl pointer-events-none" />
     <div class="absolute -bottom-20 -right-20 w-[400px] h-[400px] bg-sakura/10 rounded-full blur-3xl pointer-events-none" />
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gold/5 rounded-full blur-2xl pointer-events-none" />
 
     <div class="max-w-3xl text-center relative">
-      <p class="text-lavender font-mono text-sm mb-4 tracking-widest">Hello, I'm</p>
-      <h1 class="text-5xl md:text-7xl font-bold text-mist mb-4 tracking-tight">
+      <!-- animate-fade-down: tw-animate-css の入場アニメーション -->
+      <p class="text-lavender font-mono text-sm mb-4 tracking-widest animate-fade-down animate-duration-700 animate-delay-100">
+        Hello, I'm
+      </p>
+      <h1 class="font-display text-5xl md:text-7xl font-bold text-mist mb-4 tracking-tight text-balance animate-fade-down animate-duration-700 animate-delay-200">
         {siteConfig.name}
       </h1>
-      <p class="text-xl md:text-2xl text-haze mb-4">{siteConfig.title}</p>
-      <p class="text-haze max-w-xl mx-auto mb-10 leading-relaxed">
+      <p class="text-xl md:text-2xl text-haze mb-4 animate-fade-down animate-duration-700 animate-delay-300">
+        {siteConfig.title}
+      </p>
+      <p class="text-haze max-w-xl mx-auto mb-10 leading-relaxed text-pretty animate-fade-down animate-duration-700 animate-delay-400">
         {siteConfig.bio}
       </p>
-      <div class="flex gap-4 justify-center flex-wrap">
+      <div class="flex gap-4 justify-center flex-wrap animate-fade-down animate-duration-700 animate-delay-500">
         <a
           href="/works"
           class="px-6 py-3 bg-gradient-to-r from-lavender to-sakura text-night font-semibold rounded-lg hover:opacity-90 transition-opacity"
@@ -52,9 +56,9 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
   </section>
 
   <!-- ===== Featured Works ===== -->
-  <section class="max-w-5xl mx-auto px-4 py-16">
+  <section class="max-w-5xl mx-auto px-4 py-20">
     <div class="flex items-center justify-between mb-8">
-      <h2 class="text-2xl font-bold text-mist">Featured Works</h2>
+      <h2 class="font-display text-2xl font-bold text-mist text-balance">Featured Works</h2>
       <a href="/works" class="text-sm text-lavender hover:text-sakura transition-colors">
         すべて見る →
       </a>
@@ -65,16 +69,16 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
         {featuredWorks.map((work) => <WorkCard work={work} />)}
       </div>
     ) : (
-      <p class="text-dim text-center py-12 border border-dashed border-border rounded-xl">
-        Works は microCMS に追加後に表示されます
-      </p>
+      <div class="text-center py-16 border border-dashed border-border rounded-xl">
+        <p class="text-dim text-pretty">Works は microCMS に追加後に表示されます</p>
+      </div>
     )}
   </section>
 
   <!-- ===== Latest Blog ===== -->
-  <section class="max-w-5xl mx-auto px-4 py-16">
+  <section class="max-w-5xl mx-auto px-4 py-20">
     <div class="flex items-center justify-between mb-8">
-      <h2 class="text-2xl font-bold text-mist">Latest Blog</h2>
+      <h2 class="font-display text-2xl font-bold text-mist text-balance">Latest Blog</h2>
       <a href="/blog" class="text-sm text-lavender hover:text-sakura transition-colors">
         すべて見る →
       </a>
@@ -85,20 +89,20 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
         {latestBlogs.map((blog) => <BlogCard blog={blog} />)}
       </div>
     ) : (
-      <p class="text-dim text-center py-12 border border-dashed border-border rounded-xl">
-        Blog は microCMS に追加後に表示されます
-      </p>
+      <div class="text-center py-16 border border-dashed border-border rounded-xl">
+        <p class="text-dim text-pretty">Blog は microCMS に追加後に表示されます</p>
+      </div>
     )}
   </section>
 
   <!-- ===== About + Skills + Music ===== -->
-  <section id="about" class="max-w-5xl mx-auto px-4 py-16">
-    <h2 class="text-2xl font-bold text-mist mb-8">About</h2>
+  <section id="about" class="max-w-5xl mx-auto px-4 py-20">
+    <h2 class="font-display text-2xl font-bold text-mist mb-10 text-balance">About</h2>
     <div class="grid md:grid-cols-2 gap-12">
 
       <!-- Bio -->
       <div>
-        <p class="text-haze leading-relaxed mb-6">
+        <p class="text-haze leading-relaxed mb-6 text-pretty">
           {siteConfig.bio}
         </p>
         <div class="flex gap-4">
@@ -106,12 +110,14 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
             href={siteConfig.github}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub プロフィール（新しいタブで開く）"
             class="text-sm text-dim hover:text-lavender transition-colors"
           >
             GitHub ↗
           </a>
           <a
             href={`mailto:${siteConfig.email}`}
+            aria-label="メールで連絡する"
             class="text-sm text-dim hover:text-lavender transition-colors"
           >
             Contact ↗
@@ -122,7 +128,7 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
       <div class="space-y-8">
         <!-- Programming Skills -->
         <div>
-          <h3 class="text-lg font-semibold text-mist mb-4">Programming</h3>
+          <h3 class="font-display text-lg font-semibold text-mist mb-4 text-balance">Programming</h3>
           <div class="space-y-3">
             {Object.entries(skillCategories).map(([category, names]) => (
               <div>
@@ -141,7 +147,7 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
 
         <!-- Music Activities -->
         <div>
-          <h3 class="text-lg font-semibold text-mist mb-4">Music</h3>
+          <h3 class="font-display text-lg font-semibold text-mist mb-4 text-balance">Music</h3>
           <div class="space-y-3">
             {musicActivities.map((activity) => (
               <div class="p-4 bg-twilight border border-border rounded-xl">
