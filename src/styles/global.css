@@ -1,7 +1,7 @@
 /* Google Fonts
-   - Dancing Script: Hero の名前専用スクリプト体（OFL ライセンス / Web 利用可）
+   - Sacramento: Hero の名前専用スクリプト体（OFL ライセンス / Web 利用可）
    - Zen Maru Gothic: 筑紫A丸ゴシック（Mac標準）の無料フォールバック */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -15,7 +15,7 @@
     "Zen Maru Gothic", "Hiragino Maru Gothic ProN",
     ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sans);
-  --font-script: 'Dancing Script', cursive;
+  --font-script: 'Sacramento', cursive;
 
   /* ===== Kawaii パステルパレット（ライト） =====
      配色戦略: ラベンダー(主) / サクラピンク(副) / ゴールド(差し色)
