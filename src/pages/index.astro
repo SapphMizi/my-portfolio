@@ -27,31 +27,10 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
     <div class="absolute -bottom-28 -right-20 w-[420px] h-[420px] bg-blossom/50 rounded-full blur-3xl pointer-events-none" />
     <div class="absolute top-1/3 right-1/4 w-40 h-40 bg-gold/15 rounded-full blur-3xl pointer-events-none" />
 
-    <div class="max-w-3xl text-center relative">
-      <h1 class="font-display text-5xl md:text-7xl font-bold text-ink mb-5 tracking-tight text-balance animate-fade-down animate-duration-700">
+    <div class="text-center relative">
+      <h1 class="font-script text-[22vw] sm:text-[18vw] md:text-[14vw] leading-none text-ink animate-fade-down animate-duration-700 select-none">
         {siteConfig.name}
       </h1>
-      <!-- 肩書きをパステルのピル型に -->
-      <p class="inline-block px-5 py-2 mb-6 rounded-full bg-cloud border border-wisteria text-lavender font-medium shadow-[var(--shadow-kawaii)] animate-fade-down animate-duration-700 animate-delay-100">
-        {siteConfig.title}
-      </p>
-      <p class="text-muted max-w-xl mx-auto mb-10 leading-relaxed text-pretty animate-fade-down animate-duration-700 animate-delay-200">
-        {siteConfig.bio}
-      </p>
-      <div class="flex gap-4 justify-center flex-wrap animate-fade-down animate-duration-700 animate-delay-300">
-        <a
-          href="/works"
-          class="px-7 py-3 bg-gradient-to-r from-lavender to-sakura text-white font-bold rounded-full shadow-[var(--shadow-kawaii-hover)] hover:scale-105 transition-transform"
-        >
-          Works を見る ♪
-        </a>
-        <a
-          href="/#about"
-          class="px-7 py-3 bg-cloud border border-wisteria text-ink hover:text-lavender font-bold rounded-full shadow-[var(--shadow-kawaii)] hover:scale-105 transition-transform"
-        >
-          About
-        </a>
-      </div>
     </div>
   </section>
 
