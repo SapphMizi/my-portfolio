@@ -10,7 +10,7 @@ const { work } = Astro.props;
 const techs = parseTags(work.tech_stack);
 ---
 
-<article class="group bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-violet-500/50 transition-all duration-300">
+<article class="group bg-twilight border border-border rounded-xl overflow-hidden hover:border-lavender/50 transition-all duration-300">
   {work.thumbnail && (
     <div class="aspect-video overflow-hidden">
       <img
@@ -24,14 +24,14 @@ const techs = parseTags(work.tech_stack);
     </div>
   )}
   <div class="p-5">
-    <h3 class="font-semibold text-lg text-white mb-2">{work.title}</h3>
+    <h3 class="font-semibold text-lg text-mist mb-2">{work.title}</h3>
     {work.description && (
-      <p class="text-zinc-400 text-sm mb-4 line-clamp-2">{work.description}</p>
+      <p class="text-haze text-sm mb-4 line-clamp-2">{work.description}</p>
     )}
     {techs.length > 0 && (
       <div class="flex flex-wrap gap-1.5 mb-4">
         {techs.map((tech) => (
-          <span class="px-2 py-0.5 bg-zinc-800 text-zinc-300 text-xs rounded-full">
+          <span class="px-2 py-0.5 bg-dusk text-haze text-xs rounded-full border border-border">
             {tech}
           </span>
         ))}
@@ -40,7 +40,7 @@ const techs = parseTags(work.tech_stack);
     <div class="flex items-center gap-4">
       <a
         href={`/works/${work.id}`}
-        class="text-sm text-violet-400 hover:text-violet-300 transition-colors"
+        class="text-sm text-lavender hover:text-sakura transition-colors"
       >
         詳細を見る →
       </a>
@@ -49,7 +49,7 @@ const techs = parseTags(work.tech_stack);
           href={work.demo_url}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
+          class="text-sm text-dim hover:text-haze transition-colors"
         >
           Demo ↗
         </a>
@@ -59,7 +59,7 @@ const techs = parseTags(work.tech_stack);
           href={work.github_url}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
+          class="text-sm text-dim hover:text-haze transition-colors"
         >
           GitHub ↗
         </a>

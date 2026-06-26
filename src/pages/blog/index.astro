@@ -8,16 +8,16 @@ const blogs = await listBlogs();
 
 <Layout title="Blog | Portfolio">
   <div class="max-w-3xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-bold text-white mb-2">Blog</h1>
-    <p class="text-zinc-400 mb-10">技術記事・日記</p>
+    <h1 class="text-3xl font-bold text-mist mb-2">Blog</h1>
+    <p class="text-haze mb-10">技術記事・日記</p>
 
     {blogs.length > 0 ? (
       <div class="flex flex-col gap-4">
         {blogs.map((blog) => <BlogCard blog={blog} />)}
       </div>
     ) : (
-      <div class="text-center py-20 border border-dashed border-zinc-800 rounded-xl">
-        <p class="text-zinc-500">microCMS に Blog を追加すると表示されます</p>
+      <div class="text-center py-20 border border-dashed border-border rounded-xl">
+        <p class="text-dim">microCMS に Blog を追加すると表示されます</p>
       </div>
     )}
   </div>

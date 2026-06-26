@@ -3,15 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import { listWorks, listBlogs } from '../lib/microcms';
-import { siteConfig, skills } from '../config';
+import { siteConfig, skills, musicActivities } from '../config';
 
-// microCMS からデータ取得（未設定の場合は空配列）
 const [featuredWorks, latestBlogs] = await Promise.all([
   listWorks(3),
   listBlogs(3),
 ]);
 
-// スキルをカテゴリでグループ化
 const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
   (acc[s.category] ??= []).push(s.name);
   return acc;
@@ -22,26 +20,30 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
 
   <!-- ===== Hero ===== -->
   <section class="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-violet-950/30 via-transparent to-transparent pointer-events-none" />
+    <!-- バナーの水彩ブロブを暗背景に再現 -->
+    <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-lavender/10 rounded-full blur-3xl pointer-events-none" />
+    <div class="absolute -bottom-20 -right-20 w-[400px] h-[400px] bg-sakura/10 rounded-full blur-3xl pointer-events-none" />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gold/5 rounded-full blur-2xl pointer-events-none" />
+
     <div class="max-w-3xl text-center relative">
-      <p class="text-violet-400 font-mono text-sm mb-4 tracking-widest">Hello, I'm</p>
-      <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
+      <p class="text-lavender font-mono text-sm mb-4 tracking-widest">Hello, I'm</p>
+      <h1 class="text-5xl md:text-7xl font-bold text-mist mb-4 tracking-tight">
         {siteConfig.name}
       </h1>
-      <p class="text-xl md:text-2xl text-zinc-300 mb-4">{siteConfig.title}</p>
-      <p class="text-zinc-400 max-w-xl mx-auto mb-10 leading-relaxed">
+      <p class="text-xl md:text-2xl text-haze mb-4">{siteConfig.title}</p>
+      <p class="text-haze max-w-xl mx-auto mb-10 leading-relaxed">
         {siteConfig.bio}
       </p>
       <div class="flex gap-4 justify-center flex-wrap">
         <a
           href="/works"
-          class="px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white font-medium rounded-lg transition-colors"
+          class="px-6 py-3 bg-gradient-to-r from-lavender to-sakura text-night font-semibold rounded-lg hover:opacity-90 transition-opacity"
         >
           Works を見る
         </a>
         <a
           href="/#about"
-          class="px-6 py-3 border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white font-medium rounded-lg transition-colors"
+          class="px-6 py-3 border border-border hover:border-lavender text-haze hover:text-mist font-medium rounded-lg transition-colors"
         >
           About
         </a>
@@ -52,8 +54,8 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
   <!-- ===== Featured Works ===== -->
   <section class="max-w-5xl mx-auto px-4 py-16">
     <div class="flex items-center justify-between mb-8">
-      <h2 class="text-2xl font-bold text-white">Featured Works</h2>
-      <a href="/works" class="text-sm text-violet-400 hover:text-violet-300 transition-colors">
+      <h2 class="text-2xl font-bold text-mist">Featured Works</h2>
+      <a href="/works" class="text-sm text-lavender hover:text-sakura transition-colors">
         すべて見る →
       </a>
     </div>
@@ -63,7 +65,7 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
         {featuredWorks.map((work) => <WorkCard work={work} />)}
       </div>
     ) : (
-      <p class="text-zinc-500 text-center py-12 border border-dashed border-zinc-800 rounded-xl">
+      <p class="text-dim text-center py-12 border border-dashed border-border rounded-xl">
         Works は microCMS に追加後に表示されます
       </p>
     )}
@@ -72,8 +74,8 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
   <!-- ===== Latest Blog ===== -->
   <section class="max-w-5xl mx-auto px-4 py-16">
     <div class="flex items-center justify-between mb-8">
-      <h2 class="text-2xl font-bold text-white">Latest Blog</h2>
-      <a href="/blog" class="text-sm text-violet-400 hover:text-violet-300 transition-colors">
+      <h2 class="text-2xl font-bold text-mist">Latest Blog</h2>
+      <a href="/blog" class="text-sm text-lavender hover:text-sakura transition-colors">
         すべて見る →
       </a>
     </div>
@@ -83,18 +85,20 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
         {latestBlogs.map((blog) => <BlogCard blog={blog} />)}
       </div>
     ) : (
-      <p class="text-zinc-500 text-center py-12 border border-dashed border-zinc-800 rounded-xl">
+      <p class="text-dim text-center py-12 border border-dashed border-border rounded-xl">
         Blog は microCMS に追加後に表示されます
       </p>
     )}
   </section>
 
-  <!-- ===== About + Skills ===== -->
+  <!-- ===== About + Skills + Music ===== -->
   <section id="about" class="max-w-5xl mx-auto px-4 py-16">
-    <h2 class="text-2xl font-bold text-white mb-8">About</h2>
+    <h2 class="text-2xl font-bold text-mist mb-8">About</h2>
     <div class="grid md:grid-cols-2 gap-12">
+
+      <!-- Bio -->
       <div>
-        <p class="text-zinc-300 leading-relaxed mb-6">
+        <p class="text-haze leading-relaxed mb-6">
           {siteConfig.bio}
         </p>
         <div class="flex gap-4">
@@ -102,36 +106,61 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
             href={siteConfig.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-sm text-zinc-400 hover:text-white transition-colors"
+            class="text-sm text-dim hover:text-lavender transition-colors"
           >
             GitHub ↗
           </a>
           <a
             href={`mailto:${siteConfig.email}`}
-            class="text-sm text-zinc-400 hover:text-white transition-colors"
+            class="text-sm text-dim hover:text-lavender transition-colors"
           >
             Contact ↗
           </a>
         </div>
       </div>
 
-      <div>
-        <h3 class="text-lg font-semibold text-white mb-4">Skills</h3>
-        <div class="space-y-4">
-          {Object.entries(skillCategories).map(([category, names]) => (
-            <div>
-              <p class="text-xs text-zinc-500 uppercase tracking-widest mb-2">{category}</p>
-              <div class="flex flex-wrap gap-2">
-                {names.map((name) => (
-                  <span class="px-3 py-1 bg-zinc-800 border border-zinc-700 text-zinc-300 text-sm rounded-lg">
-                    {name}
-                  </span>
-                ))}
+      <div class="space-y-8">
+        <!-- Programming Skills -->
+        <div>
+          <h3 class="text-lg font-semibold text-mist mb-4">Programming</h3>
+          <div class="space-y-3">
+            {Object.entries(skillCategories).map(([category, names]) => (
+              <div>
+                <p class="text-xs text-dim uppercase tracking-widest mb-2">{category}</p>
+                <div class="flex flex-wrap gap-2">
+                  {names.map((name) => (
+                    <span class="px-3 py-1 bg-twilight border border-border text-haze text-sm rounded-lg">
+                      {name}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <!-- Music Activities -->
+        <div>
+          <h3 class="text-lg font-semibold text-mist mb-4">Music</h3>
+          <div class="space-y-3">
+            {musicActivities.map((activity) => (
+              <div class="p-4 bg-twilight border border-border rounded-xl">
+                <p class="text-haze font-medium mb-2">{activity.description}</p>
+                {activity.genres.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5">
+                    {activity.genres.map((genre) => (
+                      <span class="px-2 py-0.5 bg-sakura/15 text-sakura border border-sakura/30 text-xs rounded-full">
+                        {genre}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
