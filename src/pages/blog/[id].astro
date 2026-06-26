@@ -26,31 +26,31 @@ const date = new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
 <Layout title={`${blog.title} | Blog`}>
   <div class="max-w-3xl mx-auto px-4 py-16">
 
-    <a href="/blog" class="inline-flex items-center gap-1 text-dim hover:text-lavender text-sm transition-colors mb-8">
+    <a href="/blog" class="inline-flex items-center gap-1 text-muted hover:text-lavender text-sm transition-colors mb-8">
       ← Blog 一覧へ
     </a>
 
     <header class="mb-8">
       <div class="flex items-center gap-2 mb-3">
-        <time class="text-dim text-sm">{date}</time>
+        <time class="text-faint text-sm">{date}</time>
         {blog.category && (
-          <span class="px-2 py-0.5 bg-sakura/20 text-sakura text-xs rounded-full">
+          <span class="px-2.5 py-0.5 bg-sakura/15 text-sakura text-xs rounded-full">
             {blog.category}
           </span>
         )}
       </div>
-      <h1 class="text-3xl md:text-4xl font-bold text-mist leading-snug">{blog.title}</h1>
+      <h1 class="font-display text-3xl md:text-4xl font-bold text-ink leading-snug text-balance">{blog.title}</h1>
       {tags.length > 0 && (
         <div class="flex flex-wrap gap-2 mt-4">
           {tags.map((tag) => (
-            <span class="px-2 py-0.5 bg-twilight text-haze text-xs rounded-full border border-border">{tag}</span>
+            <span class="px-2.5 py-0.5 bg-petal text-lavender text-xs rounded-full border border-wisteria">{tag}</span>
           ))}
         </div>
       )}
     </header>
 
     {blog.thumbnail && (
-      <div class="mb-10 rounded-xl overflow-hidden">
+      <div class="mb-10 rounded-3xl overflow-hidden shadow-[var(--shadow-kawaii)]">
         <img
           src={`${blog.thumbnail.url}?w=960`}
           alt={blog.title}
@@ -64,10 +64,10 @@ const date = new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
     <!--
       microCMS のリッチエディタは HTML で返ってくる。
       set:html は Next.js の dangerouslySetInnerHTML に相当。
-      prose / prose-invert は @tailwindcss/typography が提供するリッチテキスト整形クラス。
+      prose は @tailwindcss/typography のリッチテキスト整形クラス（ライト用）。
     -->
     <div
-      class="prose prose-invert prose-a:text-lavender prose-a:no-underline hover:prose-a:text-sakura max-w-none"
+      class="prose prose-zinc prose-headings:font-display prose-a:text-lavender prose-a:no-underline hover:prose-a:text-sakura max-w-none"
       set:html={blog.content}
     />
 

@@ -10,7 +10,9 @@ const { work } = Astro.props;
 const techs = parseTags(work.tech_stack);
 ---
 
-<article class="group bg-twilight border border-border rounded-xl overflow-hidden hover:border-lavender/50 transition-all duration-300">
+<article
+  class="group bg-cloud border border-wisteria/70 rounded-3xl overflow-hidden shadow-[var(--shadow-kawaii)] hover:shadow-[var(--shadow-kawaii-hover)] hover:-translate-y-1 transition-all duration-300"
+>
   {work.thumbnail && (
     <div class="aspect-video overflow-hidden">
       <img
@@ -24,14 +26,14 @@ const techs = parseTags(work.tech_stack);
     </div>
   )}
   <div class="p-5">
-    <h3 class="font-display font-semibold text-lg text-mist mb-2 text-balance">{work.title}</h3>
+    <h3 class="font-display font-bold text-lg text-ink mb-2 text-balance">{work.title}</h3>
     {work.description && (
-      <p class="text-haze text-sm mb-4 line-clamp-2 text-pretty">{work.description}</p>
+      <p class="text-muted text-sm mb-4 line-clamp-2 text-pretty">{work.description}</p>
     )}
     {techs.length > 0 && (
       <div class="flex flex-wrap gap-1.5 mb-4">
         {techs.map((tech) => (
-          <span class="px-2 py-0.5 bg-dusk text-haze text-xs rounded-full border border-border">
+          <span class="px-2.5 py-0.5 bg-petal text-lavender text-xs rounded-full border border-blossom/60">
             {tech}
           </span>
         ))}
@@ -40,7 +42,7 @@ const techs = parseTags(work.tech_stack);
     <div class="flex items-center gap-4">
       <a
         href={`/works/${work.id}`}
-        class="text-sm text-lavender hover:text-sakura transition-colors"
+        class="text-sm font-medium text-lavender hover:text-sakura transition-colors"
       >
         詳細を見る →
       </a>
@@ -49,7 +51,7 @@ const techs = parseTags(work.tech_stack);
           href={work.demo_url}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-sm text-dim hover:text-haze transition-colors"
+          class="text-sm text-muted hover:text-sakura transition-colors"
         >
           Demo ↗
         </a>
@@ -59,7 +61,7 @@ const techs = parseTags(work.tech_stack);
           href={work.github_url}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-sm text-dim hover:text-haze transition-colors"
+          class="text-sm text-muted hover:text-sakura transition-colors"
         >
           GitHub ↗
         </a>
