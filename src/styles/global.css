@@ -1,16 +1,7 @@
-/* Gistesy — Hero の名前専用（public/fonts/Gistesy.woff2 を配置後に有効） */
-@font-face {
-  font-family: 'Gistesy';
-  src: url('/fonts/Gistesy.woff2') format('woff2'),
-       url('/fonts/Gistesy.ttf')  format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Google Fonts — Zen Maru Gothic（筑紫A丸ゴシックの無料フォールバック）
-   Mac には筑紫A丸ゴシックが標準搭載されているのでそちらが優先される */
-@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+/* Google Fonts
+   - Dancing Script: Hero の名前専用スクリプト体（OFL ライセンス / Web 利用可）
+   - Zen Maru Gothic: 筑紫A丸ゴシック（Mac標準）の無料フォールバック */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -24,7 +15,7 @@
     "Zen Maru Gothic", "Hiragino Maru Gothic ProN",
     ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sans);
-  --font-script: 'Gistesy', cursive;
+  --font-script: 'Dancing Script', cursive;
 
   /* ===== Kawaii パステルパレット（ライト） =====
      配色戦略: ラベンダー(主) / サクラピンク(副) / ゴールド(差し色)

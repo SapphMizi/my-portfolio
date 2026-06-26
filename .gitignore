@@ -22,9 +22,3 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-
-# fonts（Gistesy 等は個人利用ライセンスのためリポジトリに含めない）
-public/fonts/*.woff2
-public/fonts/*.woff
-public/fonts/*.ttf
-public/fonts/*.otf
