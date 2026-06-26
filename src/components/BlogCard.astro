@@ -1,6 +1,5 @@
 ---
 import type { Blog } from '../lib/microcms';
-import Badge from './ui/Badge.astro';
 
 interface Props {
   blog: Blog;
@@ -30,9 +29,9 @@ const date = new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
     </div>
   )}
   <div class="min-w-0 flex flex-col justify-center">
-    <div class="flex items-center gap-2 mb-1">
-      <time class="text-faint text-xs">{date}</time>
-      {blog.category && <Badge variant="sakura">{blog.category}</Badge>}
+    <div class="text-faint text-xs mb-1">
+      {blog.category && <span class="text-sakura font-medium">{blog.category}</span>}
+      <span>{blog.category && ' · '}{date}</span>
     </div>
     <h3 class="font-display font-bold text-ink group-hover:text-lavender transition-colors line-clamp-2 text-balance">
       <a href={`/blog/${blog.id}`}>{blog.title}</a>

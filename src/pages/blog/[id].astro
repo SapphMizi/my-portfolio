@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { listBlogs, parseTags, type Blog } from '../../lib/microcms';
-import Badge from '../../components/ui/Badge.astro';
 
 export async function getStaticPaths() {
   const blogs = await listBlogs();
@@ -32,15 +31,13 @@ const date = new Date(blog.publishedAt).toLocaleDateString('ja-JP', {
     </a>
 
     <header class="mb-8">
-      <div class="flex items-center gap-2 mb-3">
-        <time class="text-faint text-sm">{date}</time>
-        {blog.category && <Badge variant="sakura">{blog.category}</Badge>}
+      <div class="text-faint text-sm mb-3">
+        {blog.category && <span class="text-sakura font-medium">{blog.category}</span>}
+        <span>{blog.category && ' · '}{date}</span>
       </div>
       <h1 class="font-display text-4xl md:text-5xl font-bold text-ink leading-snug text-balance">{blog.title}</h1>
       {tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 mt-4">
-          {tags.map((tag) => <Badge variant="neutral">{tag}</Badge>)}
-        </div>
+        <p class="text-sm text-muted mt-4">{tags.join(', ')}</p>
       )}
     </header>
 
