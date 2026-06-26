@@ -1,29 +1,54 @@
+/* Google Fonts — Zen Maru Gothic（筑紫A丸ゴシックの無料フォールバック）
+   Mac には筑紫A丸ゴシックが標準搭載されているのでそちらが優先され、
+   非 Mac 環境ではこの Zen Maru Gothic が読み込まれる */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
+
 @import "tailwindcss";
+@import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* ===== Sapph カラーパレット =====
-     バナーのラベンダー×ピンク×ゴールドをダーク背景に落とし込む */
+  /* ===== フォント =====
+     筑紫A丸ゴシック（= 筑紫AMゴシック / Mac 標準）を最優先。
+     無い環境は Zen Maru Gothic → システムフォントの順でフォールバック。
+     サイト全体（日本語・英語とも）にこの丸ゴシックが適用される */
+  --font-sans:
+    "筑紫A丸ゴシック", "Tsukushi A Round Gothic", "TsukuARdGothic",
+    "Zen Maru Gothic", "Hiragino Maru Gothic ProN",
+    ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans);
 
-  /* 背景系（深い紫ベース） */
-  --color-night:     #120d1a;   /* メイン背景 */
-  --color-dusk:      #1e1530;   /* サーフェス（ヘッダー・フッター） */
-  --color-twilight:  #2a1f40;   /* カード */
-  --color-border:    #3d2e56;   /* ボーダー */
-
-  /* テキスト系 */
-  --color-mist:      #f5eeff;   /* 主要テキスト（ほぼ白、ラベンダー寄り） */
-  --color-haze:      #c9b3e8;   /* 補助テキスト（ミュートラベンダー） */
-  --color-dim:       #8a7aaa;   /* 薄いテキスト（日付など） */
-
-  /* アクセント */
-  --color-lavender:  #c084e8;   /* プライマリ（バナー左のラベンダー） */
-  --color-sakura:    #e879a3;   /* セカンダリ（バナー右のピンク） */
-  --color-gold:      #d4a84a;   /* ゴールド（バナーのキラキラ） */
+  /* ===== Sapph カラーパレット ===== */
+  --color-night:     #120d1a;
+  --color-dusk:      #1e1530;
+  --color-twilight:  #2a1f40;
+  --color-border:    #3d2e56;
+  --color-mist:      #f5eeff;
+  --color-haze:      #c9b3e8;
+  --color-dim:       #8a7aaa;
+  --color-lavender:  #c084e8;
+  --color-sakura:    #e879a3;
+  --color-gold:      #d4a84a;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+  }
+
+  /* アクセシビリティ: キーボードフォーカスを明示 */
+  :focus-visible {
+    outline: 2px solid var(--color-lavender);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* reduced-motion 対応 */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

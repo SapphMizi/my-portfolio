@@ -24,9 +24,9 @@ const techs = parseTags(work.tech_stack);
     </div>
   )}
   <div class="p-5">
-    <h3 class="font-semibold text-lg text-mist mb-2">{work.title}</h3>
+    <h3 class="font-display font-semibold text-lg text-mist mb-2 text-balance">{work.title}</h3>
     {work.description && (
-      <p class="text-haze text-sm mb-4 line-clamp-2">{work.description}</p>
+      <p class="text-haze text-sm mb-4 line-clamp-2 text-pretty">{work.description}</p>
     )}
     {techs.length > 0 && (
       <div class="flex flex-wrap gap-1.5 mb-4">

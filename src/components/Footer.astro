@@ -10,6 +10,7 @@ import { siteConfig } from '../config';
         href={siteConfig.github}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="GitHub（新しいタブで開く）"
         class="text-dim hover:text-mist text-sm transition-colors"
       >
         GitHub
@@ -18,12 +19,14 @@ import { siteConfig } from '../config';
         href={siteConfig.twitter}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="X (Twitter)（新しいタブで開く）"
         class="text-dim hover:text-mist text-sm transition-colors"
       >
         X (Twitter)
       </a>
       <a
         href={`mailto:${siteConfig.email}`}
+        aria-label="メールで連絡する"
         class="text-dim hover:text-mist text-sm transition-colors"
       >
         Contact
