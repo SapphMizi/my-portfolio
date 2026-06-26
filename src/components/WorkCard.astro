@@ -1,6 +1,7 @@
 ---
 import type { Work } from '../lib/microcms';
 import { parseTags } from '../lib/microcms';
+import Badge from './ui/Badge.astro';
 
 interface Props {
   work: Work;
@@ -32,11 +33,7 @@ const techs = parseTags(work.tech_stack);
     )}
     {techs.length > 0 && (
       <div class="flex flex-wrap gap-1.5 mb-4">
-        {techs.map((tech) => (
-          <span class="px-2.5 py-0.5 bg-petal text-lavender text-xs rounded-full border border-blossom/60">
-            {tech}
-          </span>
-        ))}
+        {techs.map((tech) => <Badge variant="lavender">{tech}</Badge>)}
       </div>
     )}
     <div class="flex items-center gap-4">

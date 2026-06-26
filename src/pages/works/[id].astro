@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { listWorks, parseTags, type Work } from '../../lib/microcms';
+import Badge from '../../components/ui/Badge.astro';
 
 // Next.js の generateStaticParams に相当
 // ビルド時に全 Work の ID を収集し、各ページを静的生成する
@@ -38,9 +39,7 @@ const date = new Date(work.publishedAt).toLocaleDateString('ja-JP', {
 
     {tags.length > 0 && (
       <div class="flex flex-wrap gap-2 mt-4">
-        {tags.map((tag) => (
-          <span class="px-2.5 py-0.5 bg-petal text-lavender text-xs rounded-full border border-wisteria">{tag}</span>
-        ))}
+        {tags.map((tag) => <Badge variant="neutral">{tag}</Badge>)}
       </div>
     )}
 
@@ -64,11 +63,7 @@ const date = new Date(work.publishedAt).toLocaleDateString('ja-JP', {
       <div class="mt-8">
         <h2 class="font-display text-lg font-bold text-ink mb-3">使用技術</h2>
         <div class="flex flex-wrap gap-2">
-          {techs.map((tech) => (
-            <span class="px-3 py-1 bg-petal border border-wisteria text-lavender text-sm rounded-full">
-              {tech}
-            </span>
-          ))}
+          {techs.map((tech) => <Badge variant="lavender" class="text-sm px-3 py-1">{tech}</Badge>)}
         </div>
       </div>
     )}

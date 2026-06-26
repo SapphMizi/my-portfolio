@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import BlogCard from '../components/BlogCard.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
 import { listWorks, listBlogs } from '../lib/microcms';
 import { siteConfig, skills, musicActivities } from '../config';
 
@@ -102,10 +104,11 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
     <h2 class="font-display text-3xl font-bold text-ink mb-10 text-balance flex items-center gap-2">
       <span class="text-sakura">❀</span>About
     </h2>
-    <div class="grid md:grid-cols-2 gap-8">
+    <!-- 5カラムグリッド: Profile(2) + Skills/Music(3) で同じネスト階層に揃える -->
+    <div class="grid md:grid-cols-5 gap-6 items-start">
 
-      <!-- Bio -->
-      <div class="bg-cloud border border-wisteria/70 rounded-3xl p-6 shadow-[var(--shadow-kawaii)]">
+      <!-- Profile -->
+      <Card class="md:col-span-2">
         <p class="text-ink leading-relaxed mb-6 text-pretty">
           {siteConfig.bio}
         </p>
@@ -127,52 +130,46 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
             Contact ↗
           </a>
         </div>
-      </div>
+      </Card>
 
-      <div class="space-y-6">
-        <!-- Programming Skills -->
-        <div class="bg-cloud border border-wisteria/70 rounded-3xl p-6 shadow-[var(--shadow-kawaii)]">
-          <h3 class="font-display text-lg font-bold text-ink mb-4 flex items-center gap-2">
+      <div class="md:col-span-3 space-y-6">
+        <!-- Programming: 「カテゴリ : チップ」の行レイアウト（ネストカードを廃止） -->
+        <Card>
+          <h3 class="font-display text-lg font-bold text-ink mb-5 flex items-center gap-2">
             <span class="text-lavender">⌨</span>Programming
           </h3>
-          <div class="space-y-3">
+          <dl class="space-y-3">
             {Object.entries(skillCategories).map(([category, names]) => (
-              <div>
-                <p class="text-xs text-faint uppercase tracking-widest mb-2">{category}</p>
-                <div class="flex flex-wrap gap-2">
-                  {names.map((name) => (
-                    <span class="px-3 py-1 bg-petal text-lavender text-sm rounded-full border border-wisteria">
-                      {name}
-                    </span>
-                  ))}
-                </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1.5 sm:gap-3">
+                <dt class="sm:w-24 shrink-0 text-xs text-faint uppercase tracking-widest sm:pt-0.5">
+                  {category}
+                </dt>
+                <dd class="flex flex-wrap gap-1.5">
+                  {names.map((name) => <Badge variant="lavender">{name}</Badge>)}
+                </dd>
               </div>
             ))}
-          </div>
-        </div>
+          </dl>
+        </Card>
 
-        <!-- Music Activities -->
-        <div class="bg-cloud border border-wisteria/70 rounded-3xl p-6 shadow-[var(--shadow-kawaii)]">
-          <h3 class="font-display text-lg font-bold text-ink mb-4 flex items-center gap-2">
+        <!-- Music: 区切り線で並べた行（ネストカードを廃止） -->
+        <Card>
+          <h3 class="font-display text-lg font-bold text-ink mb-2 flex items-center gap-2">
             <span class="text-sakura">♪</span>Music
           </h3>
-          <div class="space-y-3">
+          <ul class="divide-y divide-blossom/50">
             {musicActivities.map((activity) => (
-              <div class="p-4 bg-petal/60 border border-blossom/60 rounded-2xl">
-                <p class="text-ink font-medium mb-2">{activity.description}</p>
+              <li class="flex flex-wrap items-center gap-x-3 gap-y-2 py-3 first:pt-2 last:pb-0">
+                <span class="font-medium text-ink">{activity.description}</span>
                 {activity.genres.length > 0 && (
-                  <div class="flex flex-wrap gap-1.5">
-                    {activity.genres.map((genre) => (
-                      <span class="px-2.5 py-0.5 bg-sakura/15 text-sakura text-xs rounded-full">
-                        {genre}
-                      </span>
-                    ))}
+                  <div class="flex flex-wrap gap-1.5 sm:ml-auto">
+                    {activity.genres.map((genre) => <Badge variant="sakura">{genre}</Badge>)}
                   </div>
                 )}
-              </div>
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </Card>
       </div>
 
     </div>
