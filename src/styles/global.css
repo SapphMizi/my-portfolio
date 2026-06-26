@@ -1,13 +1,22 @@
-/* Google Fonts — Space Grotesk (display) */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* Google Fonts — Zen Maru Gothic（筑紫A丸ゴシックの無料フォールバック）
+   Mac には筑紫A丸ゴシックが標準搭載されているのでそちらが優先され、
+   非 Mac 環境ではこの Zen Maru Gothic が読み込まれる */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* ===== フォント ===== */
-  --font-display: 'Space Grotesk', var(--font-sans);
+  /* ===== フォント =====
+     筑紫A丸ゴシック（= 筑紫AMゴシック / Mac 標準）を最優先。
+     無い環境は Zen Maru Gothic → システムフォントの順でフォールバック。
+     サイト全体（日本語・英語とも）にこの丸ゴシックが適用される */
+  --font-sans:
+    "筑紫A丸ゴシック", "Tsukushi A Round Gothic", "TsukuARdGothic",
+    "Zen Maru Gothic", "Hiragino Maru Gothic ProN",
+    ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans);
 
   /* ===== Sapph カラーパレット ===== */
   --color-night:     #120d1a;
