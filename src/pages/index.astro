@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import Card from '../components/ui/Card.astro';
-import Badge from '../components/ui/Badge.astro';
 import { listWorks, listBlogs } from '../lib/microcms';
 import { siteConfig, skills, musicActivities } from '../config';
 
@@ -126,9 +125,7 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
               <dt class="sm:w-24 shrink-0 text-xs text-faint uppercase tracking-widest sm:pt-0.5">
                 {category}
               </dt>
-              <dd class="flex flex-wrap gap-1.5">
-                {names.map((name) => <Badge variant="lavender">{name}</Badge>)}
-              </dd>
+              <dd class="text-sm text-ink">{names.join(', ')}</dd>
             </div>
           ))}
         </dl>
@@ -139,14 +136,12 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
         <h3 class="font-display text-lg font-bold text-ink mb-2 flex items-center gap-2">
           <span class="text-sakura">♪</span>Music
         </h3>
-        <ul class="divide-y divide-blossom/50">
+        <ul class="space-y-2">
           {musicActivities.map((activity) => (
-            <li class="flex flex-wrap items-center gap-x-3 gap-y-2 py-3 first:pt-2 last:pb-0">
+            <li class="text-sm">
               <span class="font-medium text-ink">{activity.description}</span>
               {activity.genres.length > 0 && (
-                <div class="flex flex-wrap gap-1.5 sm:ml-auto">
-                  {activity.genres.map((genre) => <Badge variant="sakura">{genre}</Badge>)}
-                </div>
+                <span class="text-muted"> — {activity.genres.join(', ')}</span>
               )}
             </li>
           ))}
