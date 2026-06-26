@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import { listWorks, listBlogs } from '../lib/microcms';
-import { siteConfig, skills } from '../config';
+import { siteConfig, skills, musicActivities } from '../config';
 
 const [featuredWorks, latestBlogs] = await Promise.all([
   listWorks(3),
@@ -91,10 +91,12 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
     )}
   </section>
 
-  <!-- ===== About + Skills ===== -->
+  <!-- ===== About + Skills + Music ===== -->
   <section id="about" class="max-w-5xl mx-auto px-4 py-16">
     <h2 class="text-2xl font-bold text-mist mb-8">About</h2>
     <div class="grid md:grid-cols-2 gap-12">
+
+      <!-- Bio -->
       <div>
         <p class="text-haze leading-relaxed mb-6">
           {siteConfig.bio}
@@ -117,23 +119,48 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
         </div>
       </div>
 
-      <div>
-        <h3 class="text-lg font-semibold text-mist mb-4">Skills</h3>
-        <div class="space-y-4">
-          {Object.entries(skillCategories).map(([category, names]) => (
-            <div>
-              <p class="text-xs text-dim uppercase tracking-widest mb-2">{category}</p>
-              <div class="flex flex-wrap gap-2">
-                {names.map((name) => (
-                  <span class="px-3 py-1 bg-twilight border border-border text-haze text-sm rounded-lg">
-                    {name}
-                  </span>
-                ))}
+      <div class="space-y-8">
+        <!-- Programming Skills -->
+        <div>
+          <h3 class="text-lg font-semibold text-mist mb-4">Programming</h3>
+          <div class="space-y-3">
+            {Object.entries(skillCategories).map(([category, names]) => (
+              <div>
+                <p class="text-xs text-dim uppercase tracking-widest mb-2">{category}</p>
+                <div class="flex flex-wrap gap-2">
+                  {names.map((name) => (
+                    <span class="px-3 py-1 bg-twilight border border-border text-haze text-sm rounded-lg">
+                      {name}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <!-- Music Activities -->
+        <div>
+          <h3 class="text-lg font-semibold text-mist mb-4">Music</h3>
+          <div class="space-y-3">
+            {musicActivities.map((activity) => (
+              <div class="p-4 bg-twilight border border-border rounded-xl">
+                <p class="text-haze font-medium mb-2">{activity.description}</p>
+                {activity.genres.length > 0 && (
+                  <div class="flex flex-wrap gap-1.5">
+                    {activity.genres.map((genre) => (
+                      <span class="px-2 py-0.5 bg-sakura/15 text-sakura border border-sakura/30 text-xs rounded-full">
+                        {genre}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
