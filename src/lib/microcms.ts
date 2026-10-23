@@ -49,6 +49,14 @@ export type Blog = {
   tags?: string;
 };
 
+// profile API のコンテンツ型（オブジェクト形式 = 単一コンテンツ）
+export type Profile = {
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  bio: string; // 自己紹介文（テキストエリア／改行そのまま反映）
+};
+
 // カンマ区切り文字列 → 配列ユーティリティ
 export function parseTags(value?: string): string[] {
   if (!value) return [];
@@ -91,6 +99,16 @@ export async function getBlog(id: string): Promise<Blog | null> {
   if (!_client) return null;
   try {
     return await _client.get<Blog>({ endpoint: 'blog', contentId: id });
+  } catch {
+    return null;
+  }
+}
+
+// オブジェクト形式の API は getObject で取得する（contentId 不要）
+export async function getProfile(): Promise<Profile | null> {
+  if (!_client) return null;
+  try {
+    return await _client.getObject<Profile>({ endpoint: 'profile' });
   } catch {
     return null;
   }

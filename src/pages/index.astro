@@ -3,13 +3,17 @@ import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import Card from '../components/ui/Card.astro';
-import { listWorks, listBlogs } from '../lib/microcms';
+import { listWorks, listBlogs, getProfile } from '../lib/microcms';
 import { siteConfig, skills, musicActivities } from '../config';
 
-const [featuredWorks, latestBlogs] = await Promise.all([
+const [featuredWorks, latestBlogs, profile] = await Promise.all([
   listWorks(3),
   listBlogs(3),
+  getProfile(),
 ]);
+
+// microCMS に profile があればそれを使い、無ければ config.ts の値にフォールバック
+const bio = profile?.bio || siteConfig.bio;
 
 const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
   (acc[s.category] ??= []).push(s.name);
@@ -17,7 +21,7 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
 }, {});
 ---
 
-<Layout title={`${siteConfig.name} | Portfolio`} description={siteConfig.bio}>
+<Layout title={`${siteConfig.name} | Portfolio`} description={bio}>
 
   <!-- ===== Hero ===== -->
   <section class="relative overflow-hidden min-h-dvh flex items-center justify-center px-4">
@@ -84,8 +88,8 @@ const skillCategories = skills.reduce<Record<string, string[]>>((acc, s) => {
     </h2>
     <!-- Profile カード（単独） -->
     <Card>
-      <p class="text-ink leading-relaxed mb-6 text-pretty">
-        {siteConfig.bio}
+      <p class="text-ink leading-relaxed mb-6 text-pretty whitespace-pre-line">
+        {bio}
       </p>
       <div class="flex gap-4">
         <a
